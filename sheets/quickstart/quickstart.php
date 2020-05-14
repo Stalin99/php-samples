@@ -53,7 +53,7 @@ function getClient()
             // Request authorization from the user.
             $authUrl = $client->createAuthUrl();
             printf("Open the following link in your browser:\n%s\n", $authUrl);
-            print 'Enter verification code: ';
+            print 'Enter verification code: '.$_GET['code'] ?? '';  # php version > 7
             $authCode = trim(fgets(STDIN));
 
             // Exchange authorization code for an access token.

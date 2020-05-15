@@ -17,9 +17,6 @@
 // [START sheets_quickstart]
 require __DIR__ . '/vendor/autoload.php';
 
-if (php_sapi_name() != 'cli') {
-    throw new Exception('This application must be run on the command line.');
-}
 
 /**
  * Returns an authorized API client.
@@ -42,6 +39,10 @@ function getClient()
     if (file_exists($tokenPath)) {
         $accessToken = json_decode(file_get_contents($tokenPath), true);
         $client->setAccessToken($accessToken);
+    }else{
+        if (php_sapi_name() != 'cli') {
+            throw new Exception('This application must be run on the command line.');
+        }
     }
 
     // If there is no previous token or it's expired.
